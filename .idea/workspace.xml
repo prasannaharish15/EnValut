@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cfe695e1-a8a2-40b0-a524-bcbf285aea1e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/controller/Demo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/dto/LoginRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/dto/RegisterDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/filter/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/securityconfig/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/envalut-backend/src/main/java/com/myvalut/envalut_backend/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MYValut-Frontend/src/pages/auth/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MYValut-Frontend/src/pages/auth/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envalut-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/envalut-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envalut-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/envalut-backend/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="34gNzaZMZIoy2b9hIQpxQw4bbSW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.EnvalutBackendApplication.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Acer/Desktop/Envalut",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cfe695e1-a8a2-40b0-a524-bcbf285aea1e" name="Changes" comment="" />
+      <created>1761631517448</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761631517448</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './login.css';
+import axios from "axios";
 function Login(){
 
     const [email,setEmail]=useState();
@@ -11,7 +12,7 @@ function Login(){
         console.log("Login attempted with", email, password);
        // Add login logic here
        try{
-        const response=await axios.post("http://localhost:8080/api/login",{
+        const response=await axios.post("http://localhost:8080/api/auth/login",{
             email,
             password,
         });
@@ -24,7 +25,6 @@ function Login(){
             alert(error.response.data.message || "Invalid email or password!");
         } else {
             console.error("Network error:", error);
-            alert("Server not reachable. Please try again later.");
         }
     }
        
