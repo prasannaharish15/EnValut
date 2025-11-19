@@ -1,5 +1,13 @@
 import "./sidebar.css";
+import { useNavigate } from "react-router-dom";
 function Sidebar() {
+
+  const navigate=useNavigate();
+
+  function handleNavigateToDashBoard(){
+    navigate("/dashboard");
+  }
+
   return (
     <>
       <div className="sidebar-main">
@@ -10,7 +18,7 @@ function Sidebar() {
             <h1>EnVault</h1>
           </div>
           
-          <div className="sidebar-icon">
+          <div onClick={handleNavigateToDashBoard} className="sidebar-icon">
             <img src="/dashboard_img.png" alt="" />
             <p>Dashboard</p>
           </div>
