@@ -1,0 +1,36 @@
+body{
+    margin: 0 ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+}
+
+.sidebar-main{
+    width: 250px;
+    background-color:#061326;
+    color:white;
+    height: 100vh;
+}
+
+.sidebar-content{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+.sidebar-icon{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 5px;
+    width: 100%; 
+    transition: background 0.3s;
+}
+h1{
+    font-size: 40px;
+}
+.sidebar-icon:hover{
+    cursor: pointer;
+    background-color:  #0a2540;
+    
+   
+}

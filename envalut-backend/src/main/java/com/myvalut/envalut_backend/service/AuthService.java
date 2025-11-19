@@ -49,7 +49,7 @@ public class AuthService {
         System.out.println("password verified");
         String token=jwtUtil.generateToken(loginUser.getEmail());
         System.out.println("jwt created");
-
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message",token));
+    
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("token",token));
     }
 }

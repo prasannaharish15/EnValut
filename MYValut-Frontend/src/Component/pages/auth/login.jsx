@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import './login.css';
 import axios from "axios";
+import { useNavigate,Link } from 'react-router-dom';
 function Login(){
 
     const [email,setEmail]=useState();
     const [password,setPassword]=useState();
+    const navigate=useNavigate();
 
     async function handleLogin(e){
         e.preventDefault();
 
         console.log("Login attempted with", email, password);
-       // Add login logic here
        try{
         const response=await axios.post("http://localhost:8080/api/auth/login",{
             email,
@@ -19,6 +20,8 @@ function Login(){
         console.log("Login successful:", response.data);
         localStorage.setItem("token",response.data.token);
         alert("Login successful!");
+        navigate("/dashboard");
+        console.log("Navigating to dashboard...");
        }catch(error){
          if (error.response) {
             console.error("Error:", error.response.data);
@@ -26,6 +29,8 @@ function Login(){
         } else {
             console.error("Network error:", error);
         }
+        setEmail("");
+        setPassword("");
     }
        
 
@@ -43,10 +48,11 @@ function Login(){
                     <button onClick={handleLogin} >Login</button>
 
                 </form>
-                <div>
-                    <p>Forget Password? <a href="/register"></a>
-                    </p><p>Create account? <a href="/register"></a></p>
-                </div>
+               <div>
+  <p><Link to="/forgot-password">Forget Password?</Link></p>
+<p><Link to="/register">Create account?</Link></p>
+</div>
+
                     
             </div>
 
