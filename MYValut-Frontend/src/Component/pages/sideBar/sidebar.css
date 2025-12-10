@@ -7,7 +7,7 @@ body{
     width: 250px;
     background-color:#081933;
     color:white;
-    height: 100vh;
+    height: auto
 }
 
 .sidebar-content{

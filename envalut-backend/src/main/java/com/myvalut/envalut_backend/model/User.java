@@ -2,6 +2,10 @@ package com.myvalut.envalut_backend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,4 +20,5 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    private LocalDateTime created_at=LocalDateTime.now();
 }

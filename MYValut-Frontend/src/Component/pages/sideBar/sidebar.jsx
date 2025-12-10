@@ -4,8 +4,8 @@ function Sidebar() {
 
   const navigate=useNavigate();
 
-  function handleNavigateToDashBoard(){
-    navigate("/dashboard");
+  function handleNavigate(path){
+    navigate(path);
   }
 
   return (
@@ -18,12 +18,12 @@ function Sidebar() {
             <h1>EnVault</h1>
           </div>
           
-          <div onClick={handleNavigateToDashBoard} className="sidebar-icon">
+          <div onClick={()=>handleNavigate("/dashboard")} className="sidebar-icon">
             <img src="/dashboard_img.png" alt="" />
             <p>Dashboard</p>
           </div>
 
-          <div className="sidebar-icon">
+          <div onClick={()=>handleNavigate("/document")} className="sidebar-icon">
             <img src="/dashboard_img.png" alt="" />
             <p>Document</p>
           </div>

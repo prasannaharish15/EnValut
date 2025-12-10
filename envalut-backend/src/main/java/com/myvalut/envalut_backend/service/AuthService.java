@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,6 +34,7 @@ public class AuthService {
         user.setUserName(newUser.getUserName());
         user.setEmail(newUser.getEmail());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setCreated_at(LocalDateTime.now());
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message","Account Created Successful"));
     }
@@ -49,7 +52,7 @@ public class AuthService {
         System.out.println("password verified");
         String token=jwtUtil.generateToken(loginUser.getEmail());
         System.out.println("jwt created");
-    
+
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("token",token));
     }
 }

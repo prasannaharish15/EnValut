@@ -5,6 +5,7 @@ import Sidebar from "./Component/pages/sideBar/sidebar";
 import UploadFile from "./Component/pages/dashboard/uploadfile";
 import ProtectedRoute from "./Component/routes/ProtectedRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Document from "./Component/pages/Document/Document";
 function App() {
   return (
     <>
@@ -37,6 +38,19 @@ function App() {
                   <Sidebar />
                   <div className="page-content">
                     <UploadFile/>
+                  </div>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/document"
+             element={
+              <ProtectedRoute>
+                <div className="app-layout">
+                  <Sidebar />
+                  <div className="page-content">
+                    <Document/>
                   </div>
                 </div>
               </ProtectedRoute>
