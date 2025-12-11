@@ -13,7 +13,11 @@
     border-radius: 5px;
     text-align: center;
     height: auto;
-    width: 200px;
+    width: 200px;  
+    white-space: nowrap;  
+    overflow: hidden;    
+    text-overflow: ellipsis; 
+ 
 }
 .recent-documents-container{
     display: flex;
@@ -41,3 +45,17 @@
     border-left: none;
     border-right: none;
 }
+.action-class{
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+  
+}
+.action-delete{
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    
+}
+

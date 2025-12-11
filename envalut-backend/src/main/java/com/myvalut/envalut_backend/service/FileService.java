@@ -4,6 +4,9 @@ import com.myvalut.envalut_backend.model.EncryptedFile;
 import com.myvalut.envalut_backend.model.User;
 import com.myvalut.envalut_backend.repository.EncryptedFileRepository;
 import com.myvalut.envalut_backend.repository.UserRepository;
+import lombok.NonNull;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,6 +37,28 @@ public class FileService {
     }
 
     private final Path uploadDir= Paths.get("uploads");
+
+    public  ResponseEntity<?> getAllDocuments(String email) {
+        Optional<User> user=userRepository.findByEmail(email);
+        if(user.isEmpty()){
+          return  ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("Message","User Not found"));
+
+        }
+        User currUser=user.get();
+        List<EncryptedFile> allFile=encryptedFileRepository.findAllByUserId(currUser.getId());
+        int i=0;
+        int j=allFile.size()-1;
+        while(i<j){
+            EncryptedFile file=allFile.get(i);
+            allFile.set(i,allFile.get(j));
+            allFile.set(j,file);
+            i++;
+            j--;
+        }
+        System.out.println(allFile);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(allFile);
+
+    }
 
 
     private void initUploaddir() throws IOException {
@@ -72,10 +98,10 @@ public class FileService {
 
 
         EncryptedFile encFile=new EncryptedFile();
-        encFile.setUser_id(user.get().getId());
+        encFile.setUserId(user.get().getId());
         encFile.setFile_name(originalFilename);
         encFile.setStored_name(storedName);
-        encFile.setFile_path(String.valueOf(filePath));
+        encFile.setFile_path(storedName);
         encFile.setFile_type(ext);
         encFile.setFile_size(String.valueOf(file.getSize()/(1024*1024)));
         encFile.setEncryption_key(encryptedAesKey);
@@ -90,5 +116,84 @@ public class FileService {
 
 
 
+    }
+
+    public ResponseEntity<?> getViewORDownloadFile(Long id, String email) {
+        try {
+            Optional<User> user=userRepository.findByEmail(email);
+            if(user.isEmpty()){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","user not found"));
+            }
+            User currUser=user.get();
+            Optional<EncryptedFile> encryptedFile=encryptedFileRepository.findById(id);
+            if(encryptedFile.isEmpty()){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","file not found"));
+
+            }
+            EncryptedFile currFile=encryptedFile.get();
+            if(!currFile.getUserId().equals(currUser.getId())){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","Access denied"));
+            }
+            byte[] encryptedBytes=getStoredFileBytes(currFile.getFile_path());
+
+            //decrypt AES Key and File
+            SecretKey aesKey=encryptionService.decryptAesKey(currFile.getEncryption_key());
+
+            byte[] decryptedFile=encryptionService.decryptFile(encryptedBytes,aesKey);
+
+            ByteArrayResource resource=new ByteArrayResource(decryptedFile);
+            String contentType = Files.probeContentType(Paths.get(currFile.getFile_path()));
+            if (contentType == null && currFile.getFile_type() != null) {
+                contentType = switch (currFile.getFile_type().toLowerCase()) {
+                    case "png" -> "image/png";
+                    case "jpg", "jpeg" -> "image/jpeg";
+                    case "pdf" -> "application/pdf";
+                    case "txt" -> "text/plain";
+                    case "doc" -> "application/msword";
+                    case "docx" -> "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
+                    default -> "application/octet-stream";
+                };
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + currFile.getFile_name() + "\"");
+            headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(decryptedFile.length));
+            if (contentType != null) headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+
+            return ResponseEntity.status(HttpStatus.OK).headers(headers).body(resource);
+
+
+        } catch (Exception e) {
+            System.out.println("ERROR OCCURRED: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("messag", e.getMessage()));
+        }
+    }
+
+    private byte[] getStoredFileBytes(String filePath) throws IOException {
+        Path fullPath = uploadDir.resolve(filePath);
+        System.out.println("Looking for file at: " + fullPath.toAbsolutePath());
+        return Files.readAllBytes(fullPath);
+    }
+
+    public ResponseEntity<?> deleteFile(Long id, String email) throws IOException {
+        Optional<User> user=userRepository.findByEmail(email);
+        if(user.isEmpty()){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","user not found"));
+        }
+        Optional<EncryptedFile> encryptedFile=encryptedFileRepository.findById(id);
+        if(encryptedFile.isEmpty()){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","file not found"));
+
+        }
+        User currUser=user.get();
+        EncryptedFile currFile=encryptedFile.get();
+        if(!currFile.getUserId().equals(currUser.getId())){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("message","Access denied"));
+        }
+        String fileName=currFile.getStored_name();
+        Files.delete(uploadDir.resolve(fileName));
+        encryptedFileRepository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","File deleted successfully"));
     }
 }

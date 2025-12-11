@@ -17,9 +17,8 @@ public class EncryptedFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long userId;
 
 
     private Long category_id;

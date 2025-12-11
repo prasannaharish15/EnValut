@@ -62,7 +62,7 @@ function UploadFile() {
 
         <div id="fileupoad">
             <label htmlFor="file-input" id="label-input">Choose a file to Upload</label>
-            <input type="file" id="file-input" ref={fileInputRef} onChange={handleFileChange} accept=".pdf, .doc, .docx, .txt"/>
+            <input type="file" id="file-input" ref={fileInputRef} onChange={handleFileChange} accept=".pdf, .doc, .docx, .txt , .jpeg, .png, .jpg"/>
           </div>
 
           

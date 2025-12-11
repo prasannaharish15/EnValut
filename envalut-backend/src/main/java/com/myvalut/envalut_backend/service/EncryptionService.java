@@ -1,5 +1,6 @@
 package com.myvalut.envalut_backend.service;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
@@ -37,5 +38,20 @@ public class EncryptionService {
         byte[]  encrypted=cipher.doFinal(aesKey.getEncoded());
         return Base64.getEncoder().encodeToString(encrypted);
 
+    }
+
+    public SecretKey decryptAesKey(String encryptionKey) throws Exception {
+        Cipher cipher = Cipher.getInstance(ALGO);
+        SecretKeySpec masterKey = new SecretKeySpec(MASTER_KEY.getBytes(), ALGO);
+        cipher.init(Cipher.DECRYPT_MODE, masterKey);
+        byte[] decoded = Base64.getDecoder().decode(encryptionKey);
+        byte[] aesKeyBytes = cipher.doFinal(decoded);
+        return new SecretKeySpec(aesKeyBytes, ALGO);
+    }
+
+    public byte[] decryptFile(byte[] encryptedBytes, SecretKey aesKey) throws Exception {
+        Cipher cipher=Cipher.getInstance(ALGO);
+        cipher.init(Cipher.DECRYPT_MODE,aesKey);
+        return cipher.doFinal(encryptedBytes);
     }
 }
