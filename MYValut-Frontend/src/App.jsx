@@ -3,7 +3,9 @@ import Register from "./Component/pages/auth/register";
 import Dashboard from "./Component/pages/dashboard/dashboard";
 import Sidebar from "./Component/pages/sideBar/sidebar";
 import UploadFile from "./Component/pages/dashboard/uploadfile";
+import Personaldiary from "./Component/pages/personaldiary/Personaldiary";
 import ProtectedRoute from "./Component/routes/ProtectedRoute";
+import Createnewdairy from "./Component/pages/personaldiary/Createnewdairy";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Document from "./Component/pages/Document/Document";
 function App() {
@@ -56,6 +58,33 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/personaldiary"
+             element={
+              <ProtectedRoute>
+                <div className="app-layout">
+                  <Sidebar />
+                  <div className="page-content">
+                    <Personaldiary/>
+                  </div>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/createnewdairy"
+             element={
+              <ProtectedRoute>
+                <div className="app-layout">
+                  <Sidebar />
+                  <div className="page-content">
+                    <Createnewdairy/>
+                  </div>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+
 
           <Route path="*" element={<Login />} />
         </Routes>

@@ -27,9 +27,9 @@ function Sidebar() {
             <img src="/dashboard_img.png" alt="" />
             <p>Document</p>
           </div>
-          <div className="sidebar-icon">
+          <div onClick={()=>handleNavigate("/personaldiary")} className="sidebar-icon">
             <img src="/dashboard_img.png" alt="" />
-            <p>Notes</p>
+            <p>Personal Diary</p>
           </div>
 
           <div className="sidebar-icon">
