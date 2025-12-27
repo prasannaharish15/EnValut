@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './login.css';
 import axios from "axios";
 import { useNavigate,Link } from 'react-router-dom';
+import api from '../../../api/axios';
 function Login(){
 
     const [email,setEmail]=useState();
@@ -13,7 +14,7 @@ function Login(){
 
         console.log("Login attempted with", email, password);
        try{
-        const response=await axios.post("http://localhost:8080/api/auth/login",{
+        const response=await api.post("api/auth/login",{
             email,
             password,
         });

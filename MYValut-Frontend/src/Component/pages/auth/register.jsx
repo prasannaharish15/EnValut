@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './register.css';
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import api from '../../../api/axios';
 function Register(){
     
     const [userName,setUserName]=useState();
@@ -13,7 +14,7 @@ function Register(){
 
         console.log("Register attempted with",userName, email, password);
        try{
-        const response=await axios.post("http://localhost:8080/api/auth/register",{
+        const response=await api.post("/api/auth/register",{
             userName,
             email,
             password,

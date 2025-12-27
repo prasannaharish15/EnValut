@@ -2,6 +2,8 @@ import "./Document.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import api from "../../../api/axios";
+
 
 function Document() {
   //     const recentDoc = [
@@ -38,8 +40,8 @@ function Document() {
   }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/file/getallfile", {
+    api
+      .get("/api/file/getallfile", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

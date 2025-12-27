@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Createnewdairy.css";
+import api from "../../../api/axios";
 import axios from "axios";
 function Createnewdairy() {
   const monthNames = [
@@ -29,7 +30,7 @@ function Createnewdairy() {
     console.log("Content:", content);
     try{
       const token=localStorage.getItem("token");
-      const response=await  axios.post("http://Localhost:8080/api/dairy/save",{
+      const response=await  api.post("api/dairy/save",{
         title:title,
         text:content
       },{
