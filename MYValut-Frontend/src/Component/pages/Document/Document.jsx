@@ -57,8 +57,8 @@ function Document() {
   async function handleDownloadFile(fileId, fileName) {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `http://localhost:8080/api/file/viewordownload/${fileId}`,
+      const response = await api.get(
+        `api/file/viewordownload/${fileId}`,
         {
           responseType: "blob",
           headers: { Authorization: "Bearer " + token },
@@ -86,8 +86,8 @@ function Document() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(
-        `http://localhost:8080/api/file/viewordownload/${fileId}`,
+      const response = await api.get(
+        `api/file/viewordownload/${fileId}`,
         {
           responseType: "blob",
           headers: { Authorization: "Bearer " + token },
@@ -104,7 +104,7 @@ function Document() {
   async function handleDeleteFile(fileId){
     try{
         const token=localStorage.getItem("token");
-        const response=await axios.delete(`http://localhost:8080/api/file/deletefile/${fileId}`,{
+        const response=await api.delete(`api/file/deletefile/${fileId}`,{
             headers:{
                 Authorization:"Bearer "+token
             }
